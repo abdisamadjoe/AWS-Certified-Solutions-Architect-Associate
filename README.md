@@ -80,135 +80,91 @@ Objects contain your data. They are like files. An object may consist of:
 * Buckets hold objects. Buckets can also have folders which in turn hold objects.
 * S3 is a **universal namespace**, so bucket names must be unique (think like having a domain name).
 
-S3 Bucket Overview
+## S3 Bucket Overview
 
+S3 Buckets are infrastructure, and they hold S3 Objects. This section covers:
+* **S3 Bucket Naming Rules:** How we have to name our buckets.
+* **S3 Bucket Restrictions and Limitations:** What we can and can't do with buckets.
+* **S3 Bucket Types:** The two different kinds of buckets, flat (general purpose) and directory.
+* **S3 Bucket Folders:** How S3 Buckets have virtual folders for general purpose buckets.
+* **Bucket Versioning:** How we can version all objects.
+* **Bucket Encryption:** How we can encrypt the contents of a bucket.
+* **Static Website Hosting:** How we can let our buckets host websites.
 
-S3 Buckets are infrastructure, and the hold S3 Objects
+> **Note:** S3 is a globally available service, but when you create a bucket, you specify a region.
 
-. S3 Bucket Naming Rules - how we have to our name bucket
+## S3 Bucket Naming Rules
 
-. S3 Bucket Restrictions and Limitations - What we can and can't do with buckets
+S3 Bucket Names are similar to valid URL rules (but with more rules), this is because S3 bucket names are used to form URL links to perform various HTTPS operations.
 
-. S3 Bucket Types - the two different kinds of buckets, flat (general purpose) and directory
+`https://myexamplebucket.s3.amazonaws.com/photo.jpg`
 
-. S3 Bucket Folders - How S3 Buckets has virtual folders for general purpose buckets
+* **Length:** Bucket names must be 3-63 characters long.
+* **Characters:** Only lowercase letters, numbers, dots (`.`), and hyphens (`-`) are allowed.
+* **Start and End:** They must begin and end with a letter or number.
+* **Adjacent Periods:** No two adjacent periods are allowed.
+* **IP Address Format:** Names can't be formatted as IP addresses (e.g., `192.168.5.4`).
+* **Restricted Prefixes:** Can't start with `xn--`, `sthree-`, or `sthree-configurator`.
+* **Restricted Suffixes:** Can't end with `-s3alias` or `--ol-s3`, reserved for access point alias names.
+* **Uniqueness:** Must be unique across all AWS accounts in all AWS Regions within a partition.
+* **Exclusivity:** A name can't be reused in the same partition until the original bucket is deleted.
+* **Transfer Acceleration:** Buckets used with S3 Transfer Acceleration can't have dots in their names.
 
-. Bucket Versioning - how we can version of all objects
+> **Note:** No Uppercase, No Underscores, No Spaces in Bucket Names.
 
-. Bucket Encryption - how we can encrypt the contents of bucket
-. Static Website Hosting - How we can let our buckets host websites
+## S3 Bucket Restrictions and Limitations
 
-Note: S3 is a globally available service but when you create a bucket you specify a region.
+* By default, you can create **100 buckets**.
+* You can create a service request to increase the limit to **1,000 buckets**.
+* You need to empty a bucket first before you can delete it.
+* There is **no max bucket size** and no limit to the number of objects in a bucket.
+* Files can be between **0 and 5 TBs**.
+* Files larger than **100MB** should use multi-part upload.
+* S3 for AWS Outposts has specific limits.
+* **Get, Put, List, and Delete** operations are designed for high availability.
+* **Create, Delete, or configuration** operations should be run less often.
 
-
-
-
-
-
-
-S3 Bocket Naming Rules
-
-
-S3 Buckets Names are similar to valid URL rules (but more rules), this is because
-S3 bucket names are used to form URL links to perform various HTTPs operations.
-
-https://myexamplebucket.s3.amazonaws.com/photo.jpg
-
-. Length: Bucket names must be 3-63 characters long.
-. Characters: Only lowercase letters, numbers, dots (.), and hyphens (-) are allowed.
-. Start and End: They must begin and end with a letter or number.
-. Adjacent Periods: No two adjacent periods are allowed.
-. IP Address Format: Names can't be formatted as IP addresses (e.g., 192.168.5.4).
-. Restricted Prefixes: Can't start with "xn -- ", "sthree-", or "sthree-configurator".
-. Restricted Suffixes: Can't end with "-s3alias" or " -- ol-s3", reserved for access point alias names.
-. Uniqueness: Must be unique across all AWS accounts in all AWS Regions within a partition.
-. Exclusivity: A name can't be reused in the same partition until the original bucket is deleted.
-. Transfer Acceleration: Buckets used with S3 Transfer Acceleration can't have dots in their names.
-
-Note: No Uppercase, No Underscores, No Spaces in Bucket Names
-
-
-
-
-
-S3 - Bucket Restrictions and Limitations
-
-
-. You can by default create 100 buckets
-
-. You can create a service request to increase to 1000 buckets
-
-. You need to empty a bucket first before you can delete it
-
-. No max bucket size and no limit to the number of objects in a bucket
-
-. Files can be between 0 and 5 TBs
-
-. Files larger than 100MB should use multi-part upload
-
-. S3 for AWS Outposts has limits
-
-. Get, Put, List, and Delete operations are designed for high availability
-
-. Create, Delete or configuration operations should be run less often.
-
-
-
-
-
-S3 - Bocket Types
+## S3 Bucket Types
 
 Amazon S3 has two types of buckets:
 
-General purpose buckets
-. Organizes data in a flat hierarchy
-. The original S3 bucket type
-. Recommended for most use cases
-. Used with all storage classes except can't be used with S3 Express One Zone storage class
-. There aren't prefix limits
-. There is a default limit of 100 general buckets per account
+### General Purpose Buckets
+* Organizes data in a flat hierarchy.
+* The original S3 bucket type.
+* Recommended for most use cases.
+* Used with all storage classes except it can't be used with the S3 Express One Zone storage class.
+* There aren't prefix limits.
+* There is a default limit of 100 general buckets per account.
 
-Directory buckets
-· Organizes data folder hierarchy
-. Only to be used with S3 Express One Zone storage class
-. Recommended when you need single-digit millisecond performance on PUT and GET
-. *There aren't prefix limits for directory buckets
-. Individual directories can scale horizontally
-. There is a default limit of 10 directory buckets per account
+### Directory Buckets
+* Organizes data in a folder hierarchy.
+* Only to be used with the S3 Express One Zone storage class.
+* Recommended when you need single-digit millisecond performance on PUT and GET.
+* There aren't prefix limits for directory buckets.
+* Individual directories can scale horizontally.
+* There is a default limit of 10 directory buckets per account.
 
+## S3 Bucket Folders
 
+The S3 Console allows you to "create folders". S3 general purpose buckets do not have true folders found in a hierarchical file system.
 
+When you create a folder in the S3 Console, Amazon S3 creates a zero-byte S3 object with a name that ends in a forward slash (e.g., `myfolder/`).
 
-S3 - Bucket Folder
+**Example:** `myfolder/myfile.jpg`
 
+* S3 folders are not their own independent identities but just S3 Objects.
+* S3 folders don't include metadata or permissions.
+* S3 folders don't contain anything; they can't be full or empty.
+* S3 folders aren't "moved"; S3 objects containing the same prefix are renamed.
 
-The S3 Console allows you to "create folders". S3 general purpose buckets
-do not have true folders found in hierarchy file system.
+## S3 Object Overview
 
-When you create a folder in S3 Console, Amazon S3 creates a zero-byte
-S3 object with a name that ends in a forward slash eg. myfolder/
+S3 Objects are resources that represent data and are not infrastructure.
 
-
-
-example myfolder/myfile.jpg
-
-. S3 folders are not their own independent identities but just S3 Objects
-. S3 folders don't include metadata, permissions
-. S3 folders don't contain anything, they can't be full or empty
-. S3 folders aren't "moved", S3 objects containing the same prefix are renamed
-
-
-
-
-
-S3 Object Overview
-
-S3 Objects are resources that represent data and is not infrastructure.
-
-. Etags - a way to detect when the contents of an object has changed without download the contents
-. Checksums - ensures the integrity of a files being uploaded or downloaded
-. Object Prefixes - simulates file-system folders in a flat hierarchy
-. Object Metadata - attach data alongside the content, to describe the contents of the data
-. Object tags - benefits resource tagging but at the object level
-. Object Locking - makes data files immutable
-. Object Versioning - have multiple versions of a data file
+* **Etags:** A way to detect when the contents of an object have changed without downloading the contents.
+* **Checksums:** Ensures the integrity of a file being uploaded or downloaded.
+* **Object Prefixes:** Simulates file-system folders in a flat hierarchy.
+* **Object Metadata:** Attach data alongside the content to describe the contents of the data.
+* **Object Tags:** Benefits resource tagging but at the object level.
+* **Object Locking:** Makes data files immutable.
+* **Object Versioning:** Have multiple versions of a data file.
