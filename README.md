@@ -1,4 +1,4 @@
-# AWS Certified Solutions Architect - Associate
+# AWS Certified Solutions Architect - Associate (SAA-C03)
 
 ## Introduction
 The AWS Certified Solutions Architect - Associate (SAA-C03) exam is intended for individuals who perform in a solutions architect role. The exam validates a candidate’s ability to use AWS technologies to design solutions based on the AWS Well-Architected Framework.
