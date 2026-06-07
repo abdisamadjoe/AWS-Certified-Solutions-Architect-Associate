@@ -54,6 +54,11 @@ The following table lists the main content domains and their weightings. The per
 
 
 
+
+
+
+
+
 ## Introduction to S3
 
 ### What is Object Storage (Object-based Storage)?
