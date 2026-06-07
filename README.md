@@ -52,13 +52,6 @@ The following table lists the main content domains and their weightings. The per
 | **Domain 4:** Design Cost-Optimized Architectures | 20% |
 | **TOTAL** | **100%** |
 
-
-
-
-
-
-
-
 ## Introduction to S3
 
 ### What is Object Storage (Object-based Storage)?
@@ -68,12 +61,18 @@ Object storage is a data storage architecture that manages data as objects, as o
 * **No Infrastructure Management:** You don't need to think about the underlying infrastructure.
 * **S3 Console:** The S3 Console provides an interface for you to upload and access your data.
 
-## S3 Object
+### S3 Object
 Objects contain your data. They are like files. An object may consist of:
 * **Key:** This is the name of the object.
 * **Value:** The data itself, made up of a sequence of bytes.
 * **Version ID:** When versioning is enabled, this represents the version of the object.
 * **Metadata:** Additional information attached to the object.
+
+> **NOTE:** You can store an individual object from **0 Bytes to 5 Terabytes** in size.
+
+### S3 Bucket
+* Buckets hold objects. Buckets can also have folders which in turn hold objects.
+* S3 is a **universal namespace**, so bucket names must be unique (think like having a domain name).
 
 > **NOTE:** You can store an individual object from **0 Bytes to 5 Terabytes** in size.
 
