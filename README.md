@@ -1,5 +1,27 @@
 # AWS Certified Solutions Architect - Associate (SAA-C03)
 
+## Table of Contents
+- [Introduction](#introduction)
+- [Target Candidate Description](#target-candidate-description)
+- [Exam Content](#exam-content)
+  - [Exam Duration](#exam-duration)
+  - [Response Types](#response-types)
+  - [Unscored Content](#unscored-content)
+- [Exam Results](#exam-results)
+- [Content Outline](#content-outline)
+- [Introduction to S3](#introduction-to-s3)
+  - [What is Object Storage (Object-based Storage)?](#what-is-object-storage-object-based-storage)
+  - [S3 Object](#s3-object)
+  - [S3 Bucket](#s3-bucket)
+- [S3 Bucket Overview](#s3-bucket-overview)
+- [S3 Bucket Naming Rules](#s3-bucket-naming-rules)
+- [S3 Bucket Restrictions and Limitations](#s3-bucket-restrictions-and-limitations)
+- [S3 Bucket Types](#s3-bucket-types)
+  - [General Purpose Buckets](#general-purpose-buckets)
+  - [Directory Buckets](#directory-buckets)
+- [S3 Bucket Folders](#s3-bucket-folders)
+- [S3 Object Overview](#s3-object-overview)
+
 ## Introduction
 The AWS Certified Solutions Architect - Associate (SAA-C03) exam is intended for individuals who perform in a solutions architect role. The exam validates a candidate’s ability to use AWS technologies to design solutions based on the AWS Well-Architected Framework.
 
@@ -71,12 +93,6 @@ Objects contain your data. They are like files. An object may consist of:
 > **NOTE:** You can store an individual object from **0 Bytes to 5 Terabytes** in size.
 
 ### S3 Bucket
-* Buckets hold objects. Buckets can also have folders which in turn hold objects.
-* S3 is a **universal namespace**, so bucket names must be unique (think like having a domain name).
-
-> **NOTE:** You can store an individual object from **0 Bytes to 5 Terabytes** in size.
-
-## S3 Bucket
 * Buckets hold objects. Buckets can also have folders which in turn hold objects.
 * S3 is a **universal namespace**, so bucket names must be unique (think like having a domain name).
 
