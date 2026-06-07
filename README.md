@@ -1,4 +1,4 @@
-# AWS-Certified-Solutions-Architect-Associate
+# AWS Certified Solutions Architect - Associate
 
 ## Introduction
 The AWS Certified Solutions Architect - Associate (SAA-C03) exam is intended for individuals who perform in a solutions architect role. The exam validates a candidate’s ability to use AWS technologies to design solutions based on the AWS Well-Architected Framework.
@@ -12,6 +12,10 @@ The exam also validates a candidate’s ability to complete the following tasks:
 The target candidate should have at least **1 year of hands-on experience** designing cloud solutions that use AWS services. For a detailed list of specific tools and technologies that might be covered on the exam, as well as lists of in-scope and out-of-scope AWS services, refer to the Appendix.
 
 ## Exam Content
+
+### Exam Duration
+* **Total Time:** 130 minutes
+* **Time Allocation:** Approximately 2.1 minutes per question
 
 ### Response Types
 There are two types of questions on the exam:
