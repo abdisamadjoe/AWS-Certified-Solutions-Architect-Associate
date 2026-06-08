@@ -184,3 +184,84 @@ S3 Objects are resources that represent data and are not infrastructure.
 * **Object Tags:** Benefits resource tagging but at the object level.
 * **Object Locking:** Makes data files immutable.
 * **Object Versioning:** Have multiple versions of a data file.
+
+
+## Write Once Read Many (WORM)
+
+**Write Once Read Many (WORM)** is a storage compliance feature that makes data immutable. You write the data once, and the file can never be modified or deleted, but you may read it an unlimited number of times.
+
+* **Use Cases:** WORM is useful in healthcare or financial industries, where files need to be audited and remain untampered.
+* **Analogy:** An example of WORM is a video game cartridge, where data is written permanently to a ROM (Read-Only Memory).
+
+## S3 Object Lock
+
+S3 Object Lock allows you to prevent the deletion of objects in a bucket. 
+
+* This feature can **only be turned on at the creation of a bucket**.
+* Object Lock is for companies that need to prevent objects from being deleted to ensure:
+  * Data integrity
+  * Regulatory compliance
+* S3 Object Lock is **SEC 17a-4, CTCC, and FINRA** regulation compliant.
+* You can store objects using a write-once-read-many (WORM) model, just like S3 Glacier.
+* You can use it to prevent an object from being deleted or overwritten for:
+  * A fixed amount of time
+  * Indefinitely
+
+**Object Retention Methods:**
+1. **Retention periods:** A fixed period of time during which an object remains locked.
+2. **Legal holds:** The object remains locked until you explicitly remove the hold.
+
+> **Note:** S3 buckets with Object Lock enabled cannot be used as destination buckets for server access logs.
+
+> **Note:** Object Locking settings can only be set via the AWS API (e.g., CLI, SDK) and not the AWS Console. This is to avoid misconfiguration by non-technical users accidentally locking objects.
+
+## Amazon S3 Bucket URI
+
+The S3 Bucket URI (Uniform Resource Identifier) is a way to reference the address of an S3 bucket and S3 objects.
+
+**Example:** 
+```text
+s3://myexamplebucket/photo.jpg
+```
+
+You will see this S3 Bucket URI required to be used for specific AWS CLI commands.
+
+**Example:**
+```bash
+aws s3 cp test.txt s3://mybucket/test2.txt
+```
+
+## AWS S3 CLI
+
+There are several command-line interfaces for interacting with S3:
+
+* **`aws s3`**: A high-level way to interact with S3 buckets and objects.
+* **`aws s3api`**: A low-level way to interact with S3 buckets and objects.
+* **`aws s3control`**: Used for managing S3 access points, S3 Outposts buckets, S3 batch operations, and Storage Lens.
+* **`aws s3outposts`**: Used to manage endpoints for S3 Outposts.
+
+## S3 Request Styles
+
+When making requests by using the REST API, there are two styles of requests:
+1. **Virtual hosted-style requests:** The bucket name is a subdomain on the host.
+2. **Path-style requests:** The bucket name is in the request path.
+
+### Virtual Hosted-Style Request
+```http
+DELETE /puppy.jpg HTTP/1.1
+Host: examplebucket.s3.us-west-2.amazonaws.com
+Date: Mon, 11 Apr 2016 12:00:00 GMT
+x-amz-date: Mon, 11 Apr 2016 12:00:00 GMT
+Authorization: authorization string
+```
+
+### Path-Style Request
+```http
+DELETE /examplebucket/puppy.jpg HTTP/1.1
+Host: s3.us-west-2.amazonaws.com
+Date: Mon, 11 Apr 2016 12:00:00 GMT
+x-amz-date: Mon, 11 Apr 2016 12:00:00 GMT
+Authorization: authorization string
+```
+
+> **Note:** To force the AWS CLI to use virtual hosted-style requests, you need to globally configure the CLI.
