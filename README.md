@@ -266,5 +266,115 @@ Authorization: authorization string
 
 > **Note:** To force the AWS CLI to use virtual hosted-style requests, you need to globally configure the CLI.
 
+## S3 Storage Classes - Standard
 
+S3 Standard is the default storage class when you upload to S3. It is designed for general-purpose storage for frequently accessed data.
+
+* **High Durability:** 11 9's of durability (99.999999999%)
+* **High Availability:** 4 9's of availability (99.99%)
+* **Data Redundancy:** Data is stored in 3 or more Availability Zones (AZs)
+* **Retrieval Time:** Within milliseconds (low latency)
+* **High Throughput:** Optimized for data that is frequently accessed and/or requires real-time access
+* **Scalability:** Easily scales to storage size and number of requests
+* **Use Cases:** Ideal for a wide range of use cases like content distribution, big data analytics, and mobile and gaming applications, where frequent access is required.
+
+**Pricing:**
+* Storage per GB
+* Per Request
+* No Retrieval fee
+* No minimum storage duration charge
+
+## S3 Storage Classes - RRS (Reduced Redundancy Storage)
+
+S3 Reduced Redundancy Storage (RRS) is a legacy storage class designed to store non-critical, reproducible data at lower levels of redundancy than Amazon S3's standard storage.
+
+* RRS was introduced in 2010, and at the time, it was cheaper than Standard storage.
+* In 2018, S3 Standard infrastructure changed, and the cost of S3 Standard storage fell well below the cost of RRS.
+* RRS currently provides no cost-benefit to customers for the reduced redundancy and has no place in modern storage use-cases.
+
+> **Note:** RRS is no longer cost-effective and is **not recommended for use**. It may still appear in the AWS Console as an option due to legacy customers.
+
+## S3 Storage Classes - Standard-IA (Infrequent Access)
+
+S3 Standard-IA is designed for data that is less frequently accessed but requires rapid access when needed.
+
+* **High Durability:** 11 9's of durability (like S3 Standard)
+* **High Availability:** 3 9's of availability (99.9%) - Slower availability compared to S3 Standard
+* **Data Redundancy:** Data is stored in 3 or more Availability Zones (AZs)
+* **Cost-Effective Storage:** Costs 50% less than Standard, as long as you don't access a file more than once a month!
+* **Retrieval Time:** Within milliseconds (low latency)
+* **High Throughput:** Optimized for rapid access, although the data is accessed less frequently compared to S3 Standard.
+* **Scalability:** Easily scales to storage size and number of requests like S3 Standard
+* **Use Cases:** Ideal for data that is accessed less frequently but requires quick access when needed, such as disaster recovery, backups, or long-term data stores.
+
+**Pricing:**
+* Storage per GB
+* Per Request
+* Has a Retrieval fee
+* Has a minimum storage duration charge of 30 days
+
+## S3 Storage Classes - Express One Zone
+
+Amazon S3 Express One Zone delivers consistent single-digit millisecond data access for your most frequently accessed data and latency-sensitive applications.
+
+* **Lowest Latency:** The lowest latency cloud object storage class available.
+* **Performance:** Data access speeds up to 10x faster than S3 Standard.
+* **Request Costs:** Request costs are 50% lower than S3 Standard.
+* **Data Redundancy:** Data is stored in a user-selected single Availability Zone (AZ).
+* **Bucket Type:** Data is stored in a new bucket type: an Amazon S3 Directory bucket.
+  * S3 Directory buckets support a simple real-folder structure.
+  * You are only allowed 10 Directory buckets by default per account.
+* **Pricing Detail:** Express One Zone applies a flat per-request charge for request sizes up to 512 KB.
+
+## S3 Storage Classes - One-Zone-IA
+
+S3 One-Zone-IA is designed for data that is less frequently accessed and offers additional savings at reduced availability.
+
+* **High Durability:** 11 9's of durability (like S3 Standard and S3 Standard-IA)
+* **Lower Availability:** 99.5%. Since it is in a single AZ, it has even lower availability than Standard-IA.
+* **Cost-Effective Storage:** Costs 20% less than Standard-IA.
+* **Data Redundancy:** Data is stored in one Availability Zone (AZ). There is a risk of data loss in the case of an AZ disaster.
+* **Retrieval Time:** Within milliseconds (low latency)
+* **Use Cases:** Ideal for secondary backup copies of on-premises data, or for storing data that can be recreated in the event of an AZ failure. It's also suitable for storing infrequently accessed data that is non-mission-critical.
+
+**Pricing:**
+* Storage per GB
+* Per Request
+* Has a Retrieval fee
+* Has a minimum storage duration charge of 30 days
+
+## S3 Glacier Storage Classes vs S3 Glacier "Vault"
+
+### S3 Glacier "Vault" (Standalone Service)
+* "S3" Glacier is a stand-alone service from S3 that uses **vaults** (instead of buckets) to store data long-term.
+* It is the original vault service and features vault control policies.
+* Most interactions occur via the AWS CLI.
+* Many enterprises are still using S3 Glacier Vault.
+
+### S3 Glacier Storage Classes (Within S3 Buckets)
+* S3 Glacier Storage classes offer similar functionality to S3 Glacier but with greater convenience and flexibility, all managed within standard S3 Buckets.
+* This is a newer approach with no attachment to the standalone S3 Glacier Vault.
+
+**Under the Hood:**
+* **S3 Glacier Instant Retrieval:** A true S3 Storage Class (no Vault required).
+* **S3 Glacier Flexible Retrieval:** Uses S3 Glacier Vault underneath.
+* **S3 Glacier Deep Archive:** Uses S3 Glacier Vault underneath.
+
+## S3 Storage Classes - Glacier Instant Retrieval
+
+S3 Glacier Instant Retrieval is a storage class designed for rarely accessed data that still needs immediate access in performance-sensitive use cases.
+
+* **High Durability:** 11 9's of durability (like S3 Standard)
+* **High Availability:** 3 9's of availability (99.9%) like S3 Standard-IA
+* **Cost-Effective Storage:** 68% lower cost than Standard-IA. Ideal for long-lived data that is accessed once per quarter.
+* **Retrieval Time:** Within milliseconds (low latency)
+* **Use Cases:** Rarely accessed data that needs immediate access (e.g., image hosting, online file-sharing applications, medical imaging and health records, news media assets, and satellite/aerial imaging).
+
+**Pricing:**
+* Storage per GB
+* Per Request
+* Has a Retrieval fee
+* Has a minimum storage duration charge of 90 days
+
+> **Note:** Glacier Instant Retrieval is not a separate service and does not require a Vault.
 
