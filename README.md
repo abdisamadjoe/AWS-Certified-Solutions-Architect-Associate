@@ -427,3 +427,17 @@ S3 Intelligent-Tiering storage class automatically moves objects into different 
 * **Deep Archive Access tier (optional):** After activation, if an object is not accessed after 180 days, it is moved here.
 
 > **Note:** S3 Intelligent-Tiering has an additional cost to analyze your objects (monitoring and automation fee).
+
+
+## S3 Storage Classes Comparison
+
+| Feature | Express One-Zone | Standard | Intelligent Tiering | Standard IA | One-Zone IA | Glacier Instant | Glacier Flexible | Glacier Deep Archive |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **Durability** | 11 9's | 11 9's | 11 9's | 11 9's | 11 9's | 11 9's | 11 9's | 11 9's |
+| **Availability** | 99.95% | 99.99% | 99.9% | 99.9% | 99.5% | 99.9% | N/A | N/A |
+| **Availability SLA** | 99.9% | 99.99% | 99% | 99% | 99% | 99%? | N/A | N/A |
+| **AZs** | 1 | >3 | >3 | >3 | 1 | >3 | >3 | >3 |
+| **Min cap. charge per obj** | N/A | N/A | N/A | 128kb | 128kb | - | 40kb | 40kb |
+| **Min stor. duration charge** | N/A | N/A | 30 days | 30 days | 30 days | 90 days | 90 days | 180 days |
+| **Retrieval fee** | N/A | N/A | N/A | Per GB | Per GB | Per GB | Per GB | Per GB |
+| **First byte latency** | single-digit ms | ms | ms | ms | ms | ms | mins to hrs | hours |
