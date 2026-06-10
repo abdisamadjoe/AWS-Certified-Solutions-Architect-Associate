@@ -441,3 +441,39 @@ S3 Intelligent-Tiering storage class automatically moves objects into different 
 | **Min stor. duration charge** | N/A | N/A | 30 days | 30 days | 30 days | 90 days | 90 days | 180 days |
 | **Retrieval fee** | N/A | N/A | N/A | Per GB | Per GB | Per GB | Per GB | Per GB |
 | **First byte latency** | single-digit ms | ms | ms | ms | ms | ms | mins to hrs | hours |
+
+
+## S3 Security Overview
+
+* **Bucket Policies:** Define permissions for an entire S3 bucket using a JSON-based access policy language.
+* **Access Control Lists (ACLs):** Provide a legacy method to manage access permissions on individual objects and buckets.
+* **AWS PrivateLink for Amazon S3:** Enables private network access to S3, bypassing the public internet for enhanced security.
+* **Cross-Origin Resource Sharing (CORS):** Allows restricted resources on a web page from another domain to be requested.
+* **Amazon S3 Block Public Access:** Offers settings to easily block public access to all your S3 resources.
+* **IAM Access Analyzer for S3:** Analyzes resource policies to help identify and mitigate potential access risks.
+* **Internetwork Traffic Privacy:** Ensures data privacy by encrypting data moving between AWS services and the Internet.
+* **Object Ownership:** Manages data ownership between AWS accounts when objects are uploaded to S3 buckets.
+* **Access Points:** Simplifies managing data access at scale for shared datasets in S3.
+* **Access Grants:** Provides access to S3 data via directory services (e.g., Active Directory).
+* **Versioning:** Preserves, retrieves, and restores every version of every object stored in an S3 bucket.
+* **MFA Delete:** Adds an additional layer of security by requiring MFA for the deletion of S3 objects.
+* **Object Tags:** Provides a way to categorize storage by assigning key-value pairs to S3 objects.
+* **In-Transit Encryption:** Protects data by encrypting it as it travels to and from S3 over the internet.
+* **Server-Side Encryption:** Automatically encrypts data when writing it to S3 and decrypts it when downloading.
+* **Client-Side Encryption:** Encrypts data client-side before uploading to S3 and decrypts it after downloading.
+* **Compliance Validation for Amazon S3:** Ensures S3 services meet compliance requirements like HIPAA, GDPR, etc.
+* **Infrastructure Security:** Protects the underlying infrastructure of the S3 service, ensuring data integrity and availability.
+
+## Amazon S3 Block Public Access
+
+Block Public Access is a safety feature that is enabled by default to block all public access to an S3 bucket.
+
+> **Important:** Unrestricted access to S3 buckets is the **#1 security misconfiguration**.
+
+**There are four options to configure:**
+* **New Access Control Lists (ACLs):** Blocks new ACLs from being created.
+* **Any Access Control Lists:** Blocks all existing and new ACLs.
+* **New Bucket Policies or Access Points:** Blocks new bucket policies or access points from granting public access.
+* **Any Bucket Policies or Access Points:** Blocks all existing and new bucket policies or access points from granting public access.
+
+> **Note:** Access points can have their own independent Block Public Access setting.
