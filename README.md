@@ -378,3 +378,52 @@ S3 Glacier Instant Retrieval is a storage class designed for rarely accessed dat
 
 > **Note:** Glacier Instant Retrieval is not a separate service and does not require a Vault.
 
+
+
+## S3 Storage Classes - Glacier Flexible Retrieval
+
+S3 Glacier Flexible Retrieval (formerly S3 Glacier) combines S3 and Glacier into a single set of APIs. It's considerably faster than Glacier Vault-based storage.
+
+**Retrieval Tiers** (the faster, the more expensive):
+* **Expedited Tier:** 1-5 mins. For urgent requests. Limited to 250 MB archive size.
+* **Standard Tier:** 3-5 hours. No archive size limit. This is the default option.
+* **Bulk Tier:** 5-12 hours. No archive size limit, even petabytes worth of data.
+
+**Pricing & Overhead:**
+* You pay per GB retrieved and the number of requests. This is a separate cost from just the cost of storage.
+* Archived objects will have an additional **40KB** of data overhead:
+  * 32KB for archive index and archive metadata information.
+  * 8KB for the name of the object.
+* **Best Practice:** You should store fewer and larger files, instead of smaller files. 40KB on thousands of files adds up.
+
+> **Note:** Glacier Flexible Retrieval is not a separate service and does not require a Vault.
+
+## S3 Storage Classes - Glacier Deep Archive
+
+S3 Glacier Deep Archive combines S3 and Glacier into a single set of APIs. It's more cost-effective than S3 Glacier Flexible but has a greater cost of retrieval.
+
+**Retrieval Tiers:**
+* **Standard Tier:** 12-48 hours. No archive size limit. This is the default option.
+* **Bulk Tier:** 12-48 hours. No archive size limit, even petabytes worth of data.
+
+> **Note:** There is no Expedited tier for Glacier Deep Archive.
+
+**Overhead:**
+* Archived objects will have an additional **40KB** of data:
+  * 32KB for index and metadata information.
+  * 8KB for the name of the object.
+
+> **Note:** Glacier Deep Archive is not a separate service and does not require a Vault.
+
+## S3 Storage Classes - Intelligent-Tiering
+
+S3 Intelligent-Tiering storage class automatically moves objects into different storage tiers to reduce storage costs, but charges a low monthly cost for object monitoring and automation.
+
+**Access Tiers:**
+* **Frequent Access tier (automatic):** The default tier. Objects remain in here as long as they are being accessed.
+* **Infrequent Access tier (automatic):** If an object is not accessed after 30 days, it is moved here.
+* **Archive Instant Access tier (automatic):** If an object is not accessed after 90 days, it is moved here.
+* **Archive Access tier (optional):** After activation, if an object is not accessed after 90 days, it is moved here.
+* **Deep Archive Access tier (optional):** After activation, if an object is not accessed after 180 days, it is moved here.
+
+> **Note:** S3 Intelligent-Tiering has an additional cost to analyze your objects (monitoring and automation fee).
