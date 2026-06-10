@@ -492,3 +492,58 @@ ACLs grant basic read/write permissions to other AWS accounts.
 S3 ACLs have been traditionally used to allow other AWS accounts to upload objects to a bucket.
 
 > **Note:** Access Control Lists (ACLs) are a **legacy feature** of S3. There are much more robust and recommended ways to provide cross-account access via **Bucket Policies** and **Access Points**.
+
+
+Amazon S3 - Bocket Policies
+
+S3 Bucket Policy is a resource-based policy to grant an s3 bucket and bucket
+objects to other Principles eg. AWS Accounts, Users, AWS services
+
+
+
+S3 Bucket Policies vs IAM Policies
+
+S3 Bucket policies have overlapping functionality as an IAM policy that grant access to S3.
+S3 Bucket Policies provide convenience over IAM policies granting S3 access.
+
+
+S3 Bucket Policy
+
+Provides access to a specific bucket and its objects
+
+You can specific multiple principal to grant access
+
+Bucket Policies can be 20 KB in size
+
+Block Public Access is turned on by default and
+will DENY all anonymous access even if the
+bucket policy grant its unless the feature is
+turned off.
+
+
+IAM Policy
+
+Provides access to many AWS services
+Can provide permissions for multiple buckets in one policy
+
+The principal by default is the entity the IAM
+policy is attached to
+
+IAM policy sizes are limited based on the principal:
+. Users 2 KB
+. Groups 5 KB
+. Roles 10 KB
+
+
+Amazon S3 - Access Grants
+
+Amazon S3 Access Grants lets you map identities in a directory service
+(IAM Identify center, Active Directory, Okta) to access datasets in s3.
+
+
+IAM Access Analyzer for S3
+
+Access Analyzer for S3 will alert you when your S3 buckets are exposed to the Internet or other AWS Accounts.
+
+
+In order to use Access Analyzer for S3 you need to first create an analyzer in IAM Access Analyzer at the account level.
