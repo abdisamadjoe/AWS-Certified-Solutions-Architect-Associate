@@ -477,3 +477,18 @@ Block Public Access is a safety feature that is enabled by default to block all 
 * **Any Bucket Policies or Access Points:** Blocks all existing and new bucket policies or access points from granting public access.
 
 > **Note:** Access points can have their own independent Block Public Access setting.
+
+
+## Amazon S3 - Access Control Lists (ACLs)
+
+ACLs grant basic read/write permissions to other AWS accounts. 
+
+**Key Limitations of ACLs:**
+* You can grant permissions **only to other AWS accounts**.
+* You **cannot** grant permissions to users in your own account.
+* You **cannot** grant conditional permissions.
+* You **cannot** explicitly deny permissions.
+
+S3 ACLs have been traditionally used to allow other AWS accounts to upload objects to a bucket.
+
+> **Note:** Access Control Lists (ACLs) are a **legacy feature** of S3. There are much more robust and recommended ways to provide cross-account access via **Bucket Policies** and **Access Points**.
