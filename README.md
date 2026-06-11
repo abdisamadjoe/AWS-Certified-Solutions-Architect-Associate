@@ -547,3 +547,75 @@ Access Analyzer for S3 will alert you when your S3 buckets are exposed to the In
 
 
 In order to use Access Analyzer for S3 you need to first create an analyzer in IAM Access Analyzer at the account level.
+
+
+## Internetwork Traffic Privacy
+
+Internetwork traffic privacy is about keeping data private as it travels across different networks.
+
+### AWS PrivateLink (VPC Interface Endpoints)
+Allows you to connect an Elastic Network Interface (ENI) directly to other AWS services (e.g., S3, EC2, Lambda). It can also connect to select third-party services via the AWS Marketplace.
+* **Cross-Account:** Yes, AWS PrivateLink can go cross-account.
+* **Permissions:** Has fine-grained permissions via VPC endpoint policies.
+* **Cost:** There is a charge for using AWS PrivateLink.
+
+### VPC Gateway Endpoint
+Allows you to connect a VPC directly to S3 (or DynamoDB), staying private within the internal AWS network.
+* **Cross-Account:** No, VPC Gateway Endpoints cannot go cross-account.
+* **Permissions:** Does not have fine-grained permissions.
+* **Cost:** There is **no charge** to use VPC Gateway Endpoints.
+
+## Cross-Origin Resource Sharing (CORS)
+
+Cross-Origin Resource Sharing (CORS) is an HTTP-header based mechanism that allows a server to indicate any other origins (domain, scheme, or port) than its own from which a browser should permit loading of resources.
+
+Access is controlled via HTTP headers:
+
+**Request Headers:**
+* `Origin`
+* `Access-Control-Request-Method`
+* `Access-Control-Request-Headers`
+
+**Response Headers:**
+* `Access-Control-Allow-Origin`
+* `Access-Control-Allow-Credentials`
+* `Access-Control-Expose-Headers`
+* `Access-Control-Max-Age`
+* `Access-Control-Allow-Methods`
+
+> **Note:** CORS restricts which websites may access data to be loaded onto its page.
+
+## S3 Encryption Overview
+
+### Encryption In Transit
+Data is encrypted by the sender and then decrypted by the receiver.
+
+### Encryption At-Rest
+* **Client-Side Encryption (CSE):** Data is encrypted by the client and then sent to the server. The client has the key; the server will serve the encrypted file since it does not have the key to decrypt when data is requested.
+* **Server-Side Encryption (SSE):** Data is encrypted by the server. The server has the key to decrypt when data is requested.
+
+## S3 - Encryption In Transit
+
+Encryption In-Transit ensures that data remains confidential and cannot be intercepted or viewed by unauthorized parties while moving between locations. 
+
+**Common Algorithms:** TLS, SSL
+
+### Transport Layer Security (TLS)
+An encryption protocol for data integrity between two or more communicating computer applications.
+* TLS 1.0 and 1.1 are **deprecated**.
+* **TLS 1.2 and TLS 1.3** are the current best practices.
+
+### Secure Sockets Layer (SSL)
+An older encryption protocol for data integrity between communicating applications.
+* SSL 1.0, 2.0, and 3.0 are all **deprecated**.
+
+## S3 - Server-Side Encryption
+
+Server-Side Encryption (SSE) is **always-on** for all new S3 objects.
+
+* **SSE-S3:** Amazon S3 manages the keys. Encrypts using the AES-GCM (256-bit) algorithm.
+* **SSE-KMS:** Uses AWS Key Management Service (KMS). You manage the keys.
+* **SSE-C:** Customer-provided keys. You manage the keys entirely.
+* **DSSE-KMS:** Dual-layer server-side encryption. Encrypts the object twice for enhanced security.
+
+> **Note:** Server-side encryption only encrypts the **contents** of an object, not its metadata.
