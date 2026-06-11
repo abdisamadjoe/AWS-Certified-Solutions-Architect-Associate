@@ -619,3 +619,99 @@ Server-Side Encryption (SSE) is **always-on** for all new S3 objects.
 * **DSSE-KMS:** Dual-layer server-side encryption. Encrypts the object twice for enhanced security.
 
 > **Note:** Server-side encryption only encrypts the **contents** of an object, not its metadata.
+
+
+## S3 Bucket Key
+
+When you use SSE-KMS, an individual data key is used for every object request. In this case, S3 has to call AWS KMS every time a request is made. KMS charges based on the number of requests, so this cost can add up quickly.
+
+**S3 Bucket Key** lets you generate a short-lived bucket-level key from AWS KMS that is temporarily stored in S3.
+* **Cost Reduction:** Reduces KMS request costs by up to 99%.
+* **Performance:** Decreases request traffic and improves overall performance.
+
+**Key Details:**
+* A unique bucket-level key is generated for each requester.
+* You can enable the Bucket Key at the **bucket level** to apply it to all new objects.
+* You can enable the Bucket Key at the **object level** for only specific objects.
+* S3 Bucket Key can be enabled for both **SSE-S3** and **SSE-KMS**.
+
+## S3 - Client-Side Encryption
+
+Client-Side Encryption is when you encrypt your own files before uploading them to S3. This provides a guarantee that AWS, and no third-party, can decrypt your data, as you retain full control of the encryption keys.
+
+## S3 - Data Consistency
+
+**What is data consistency?**
+It refers to data being kept in two different places and whether the data exactly matches or does not match across those locations.
+
+* **Strongly Consistent:** Every time you request data (query), you can expect consistent data to be returned within a specific time (e.g., 1 second). You will never be returned old data, but you may have to wait at least 2 seconds for the query to return.
+* **Eventually Consistent:** When you request data, you may get back inconsistent data within a short window (e.g., 2 seconds). The system gives you whatever data is currently in the database (which could be new or old), but if you wait a little bit longer, it will generally be up to date.
+
+> **Important Note:** Amazon S3 offers **strong consistency** for all read, write, and delete operations. Prior to January 2020, S3 did not have strong consistency for all S3 operations.
+
+## S3 - Object Replication
+
+Object Replication helps you achieve the following:
+* Replicate objects while retaining metadata.
+* Replicate objects into different storage classes.
+* Maintain object copies under different ownership.
+* Keep objects stored over multiple AWS Regions.
+* Replicate objects within 15 minutes.
+* Sync buckets, replicate existing objects, and replicate previously failed or replicated objects.
+* Replicate objects and fail over to a bucket in another AWS Region.
+
+**Replication Options in S3:**
+* **Cross-Region Replication (CRR):** Live-replication across different regions.
+* **Same-Region Replication (SRR):** Live-replication within the same region.
+* **Bi-Directional Replication:** Live-replication in both directions between two buckets.
+* **S3 Batch Replication:** On-demand replication for existing objects.
+
+## S3 Versioning
+
+S3 Versioning allows you to store multiple versions of S3 objects. With versioning, you can recover more easily from unintended user actions and application failures, such as accidental deletion or overwrite.
+
+**Key Features:**
+* Stores all versions of an object in S3 at the same object key address.
+* By default, S3 Versioning is **disabled** on buckets, and you must explicitly enable it.
+* Once enabled, it **cannot be disabled**, only suspended on the bucket.
+* Fully integrates with S3 Lifecycle rules.
+* **MFA Delete** feature provides extra protection against the permanent deletion of your data.
+
+**Bucket States:**
+Buckets can be in one of three states:
+1. **Unversioned** (default)
+2. **Versioned**
+3. **Versioning Suspended**
+
+## Introduction to S3 Lifecycle
+
+S3 Lifecycle allows you to automate the storage class changes, archival, or deletion of objects.
+* Can be used together with versioning.
+* Can be applied to both current and previous (noncurrent) versions.
+
+**There are two types of Actions:**
+1. **Transition Actions:** Changing the storage class of an object.
+2. **Expiration Actions:** Deleting an object after a certain period.
+
+**Lifecycle Rule Actions:**
+* Move current versions of objects between storage classes.
+* Move noncurrent versions of objects between storage classes.
+* Expire current versions of objects.
+* Permanently delete noncurrent versions of objects.
+* Delete expired object delete markers or incomplete multipart uploads.
+
+## Introduction to S3 Transfer Acceleration
+
+S3 Transfer Acceleration is a bucket-level feature that provides fast and secure transfer of files over long distances between your end users and an S3 bucket. It utilizes CloudFront's distributed Edge Locations to quickly enter the Amazon Global Network.
+
+**Requirements and Constraints:**
+* Only supported on **virtual-hosted style requests**.
+* Buckets **cannot contain periods** and must be DNS compliant.
+* It can take up to **20 minutes** after enabling for Transfer Acceleration to take effect.
+
+## S3 - Presigned URLs
+
+S3 Presigned URLs provide temporary access to upload or download object data via a URL. 
+
+* Presigned URLs are commonly used to provide temporary access to private objects without requiring AWS credentials.
+* You can use the **AWS CLI** or **AWS SDK** to generate a Presigned URL.
